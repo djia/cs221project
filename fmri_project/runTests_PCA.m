@@ -2,7 +2,7 @@
 subjects = {'data-starplus-04799-v7.mat', 'data-starplus-04820-v7.mat', 'data-starplus-04847-v7.mat', 'data-starplus-05675-v7.mat', 'data-starplus-05680-v7.mat', 'data-starplus-05710-v7.mat'};
 accuracy = zeros(length(subjects),1);
 for sub_id = 1:length(subjects) 
-load(subjects{1,sub_id}); 
+    load(subjects{1,sub_id}); 
 
     % collect the non-noise and non-fixation trials
     trials=find([info.cond]>1); 
@@ -64,20 +64,20 @@ load(subjects{1,sub_id});
 	
 	
 	    % train a Naive Bayes classifier
-       [classifier] = trainClassifier(examplesTraining,labelsTraining,'nbayes');   %train classifier
+        [classifier] = trainClassifier(examplesTraining,labelsTraining,'nbayes');   %train classifier
 
-       % apply the Naive Bayes classifier to the training data (it's best to use cross    
-       %validation, of course, to obtain an estimate of its true error).  The returned
-       %array 'predictions' is an array where predictions(k,j) = log P(example_k |
-       %class_j).
+        % apply the Naive Bayes classifier to the training data (it's best to use cross    
+        %validation, of course, to obtain an estimate of its true error).  The returned
+        %array 'predictions' is an array where predictions(k,j) = log P(example_k |
+        %class_j).
 
-       [predictions] = applyClassifier(examplesTest,classifier);       %test it
+        [predictions] = applyClassifier(examplesTest,classifier);       %test it
 
-       % summarize the results of the above predictions.   
+        % summarize the results of the above predictions.   
 
-       [result,predictedLabels,trace] = summarizePredictions(predictions,classifier,'averageRank',labelsTest);
-	   accuracy_per_sub(i) = 1 - result{1};
-	end
+        [result,predictedLabels,trace] = summarizePredictions(predictions,classifier,'averageRank',labelsTest);
+        accuracy_per_sub(i) = 1 - result{1};
+    end
     accuracy(sub_id) = mean(accuracy_per_sub);
 
 end
