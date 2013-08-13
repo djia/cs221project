@@ -16,6 +16,7 @@ k = 1;
 for i = 1 : size(maxDimensions, 2)
    for j = 1 : size(whiteningChoices)
       tests(k, :) = [whiteningChoices(j, 1), whiteningChoices(j, 2), maxDimensions(1, i)];
+      k = k + 1;
    end
 end
 
