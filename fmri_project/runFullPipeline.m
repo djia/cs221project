@@ -24,4 +24,8 @@ for i = 1 : size(tests, 1):
     accuracies[i] = accuracy;
 end
 
+fileID = fopen('results.txt','w');
+fprintf(fileID,'%f \n', accuracies);
+fclose(fileID);
+
 accuracies
