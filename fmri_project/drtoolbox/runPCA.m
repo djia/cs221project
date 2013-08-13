@@ -1,7 +1,9 @@
 function [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, bPCAWhitening, bZCAWhitening)
 
 [examplesTraining, mapping] = myPCA(examplesTraining');
-examplesTest = mapping.U' * (examplesTest' - mapping.mean);
+% size(examplesTest');
+% size(mapping.mean);
+examplesTest = mapping.U' * (examplesTest' - repmat(mapping.mean, 1, size(examplesTest', 2)));
 
 if (bPCAWhitening)
     examplesTraining = diag(1./mapping.lambda)*examplesTraining;

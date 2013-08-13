@@ -48,23 +48,27 @@ for sub_id = 1:length(subjects)
 		
 		%Reducing the dimensions
 
-%        examplesTraining = dctn(examplesTraining,2);
+%       examplesTraining = dctn(examplesTraining,2);
 %		examplesTest = dctn(examplesTest,2);
 %		examplesTraining(:,10000:length(examplesTraining(1,:))) = [];
 %		examplesTest(:,10000:length(examplesTraining(1,:))) = [];
 		
 %		[examplesTraining, mapping] = compute_mapping(examplesTraining, 'PCA', 78);
-%		examplesTest = out_of_sample(examplesTest, mapping);
+%		examplesTest = out_of_sasmple(examplesTest, mapping);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%Use this for final runs
-		[examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
+        %examplesTraining
+        %examplesTest
+		%[examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
+        addpath(genpath('~/Documents/cs221/cs221project/fmri_project'))
+        [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%This is just for checking the dimensions needed to retain > 95% variance of the data
-%%May be just don't the train the classifier for the first run
-%                [examplesTraining, mapping] = myPCA(examplesTraining');
+%%May be just don't the train thse classifier for the first run
+%       [examplesTraining, mapping] = myPCA(examplesTraining');
 %		N = 60;
-%		variance_retained = sum(mapping.lambda(1:N))/sum(mapping.lambda)
+%		variance_retained = sum(mapping.lambda(1 : N)) / sum(mapping.lambda)
 
 		
 	
