@@ -61,7 +61,7 @@ for sub_id = 1:length(subjects)
         %examplesTraining
         %examplesTest
 		%[examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
-        addpath(genpath('~/Documents/cs221/cs221project/fmri_project'))
+        % addpath(genpath('~/Documents/cs221/cs221project/fmri_project'))
         [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%This is just for checking the dimensions needed to retain > 95% variance of the data

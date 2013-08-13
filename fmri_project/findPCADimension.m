@@ -51,56 +51,17 @@ for j = 1 : nLambdas
             examplesTest = [examples(i, :); examples(i + nTrials, :)];
             labelsTest = [labels(i); labels(i + nTrials)];
 
-
-
-
-            %Reducing the dimensions
-
-    %       examplesTraining = dctn(examplesTraining,2);
-    %		examplesTest = dctn(examplesTest,2);
-    %		examplesTraining(:,10000:length(examplesTraining(1,:))) = [];
-    %		examplesTest(:,10000:length(examplesTraining(1,:))) = [];
-
-    %		[examplesTraining, mapping] = compute_mapping(examplesTraining, 'PCA', 78);
-    %		examplesTest = out_of_sasmple(examplesTest, mapping);
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%Use this for final runs
-            %examplesTraining
-            %examplesTest
-            %[examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
-            addpath(genpath('~/Documents/cs221/cs221project/fmri_project'))
-            % [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%This is just for checking the dimensions needed to retain > 95% variance of the data
-    %%May be just don't the train thse classifier for the first run
+            % addpath(genpath('~/Documents/cs221/cs221project/fmri_project'))
             [examplesTraining, mapping] = myPCA(examplesTraining');
             N = j;
             varianceRetained = sum(mapping.lambda(1 : N)) / sum(mapping.lambda)
+            
+            % check to see whether the variance threshold is retained
+            % if not, then just try the next lambda
             if(varianceRetained < varianceThreshold)
                 varianceThresholdMet = 0;
                 break;
             end
-
-
-
-
-            % train a Naive Bayes classifier
-    %        [classifier] = trainClassifier(examplesTraining,labelsTraining,'nbayes');   %train classifier
-
-            % apply the Naive Bayes classifier to the training data (it's best to use cross    
-            %validation, of course, to obtain an estimate of its true error).  The returned
-            %array 'predictions' is an array where predictions(k,j) = log P(example_k |
-            %class_j).
-
-    %        [predictions] = applyClassifier(examplesTest,classifier);       %test it
-
-            % summarize the results of the above predictions.   
-
-    %        [result,predictedLabels,trace] = summarizePredictions(predictions,classifier,'averageRank',labelsTest);
-    %        accuracy_per_sub(i) = 1 - result{1};
-    %    accuracy(sub_id) = mean(accuracy_per_sub);
-
         end
         
         if(varianceThresholdMet == 0)
@@ -108,7 +69,6 @@ for j = 1 : nLambdas
         end
         
     end
-    %accuracy
     
     if(varianceThresholdMet == 1)
         j
