@@ -62,7 +62,9 @@ for sub_id = 1:length(subjects)
         %examplesTest
 		%[examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
         % addpath(genpath('~/Documents/cs221/cs221project/fmri_project'))
-        [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1);
+        [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, 0, 1, 78);
+	size(examplesTraining)
+	size(examplesTest)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%This is just for checking the dimensions needed to retain > 95% variance of the data
 %%May be just don't the train thse classifier for the first run
