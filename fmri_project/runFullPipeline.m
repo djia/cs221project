@@ -3,7 +3,7 @@ addpath(genpath('~/Documents/cs221/cs221project/fmri_project'))
 
 % define the max dimensions to check
 % these corresponds to 70%-95%+ of variance accountability
-maxDimensions = [52, 57, 61, 65, 69, 73, 78]
+maxDimensions = [52, 57, 61, 65, 69, 73, 78];
 
 whiteningChoices = [
     0, 0;
@@ -19,9 +19,9 @@ for i = 1 : size(maxDimensions, 2)
    end
 end
 
-for i = 1 : size(tests, 1):
+for i = 1 : size(tests, 1)
     [accuracy] = runTests_PCA(tests(i, 1), tests(i, 2), tests(i, 3));
-    accuracies[i] = accuracy;
+    accuracies(i, :) = accuracy;
 end
 
 fileID = fopen('results.txt','w');
