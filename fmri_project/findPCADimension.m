@@ -4,8 +4,11 @@ accuracy = zeros(length(subjects),1);
 
 
 nLambdas = 78;
-varianceThreshold = 0.95;
+varianceThresholds = [0.70, 0.75, 0.80, 0.85, 0.90, 0.95];
+
+thresholdCounter = 1;
 for j = 1 : nLambdas
+    varianceThreshold = varianceThresholds(thresholdCounter);
     varianceThresholdMet = 1;
     
     % loop through all the subjects
@@ -72,7 +75,15 @@ for j = 1 : nLambdas
     
     if(varianceThresholdMet == 1)
         j
-        break;
+        smallestNs(thresholdCounter) = j;
+        thresholdCounter = thresholdCounter + 1;
+        if(thresholdCounter > size(varianceThresholds, 2))
+            break;
+        end
     end
     
 end
+display('For threshold levels:');
+varianceThresholds
+display('the smallest Ns are:');
+smallestNs
