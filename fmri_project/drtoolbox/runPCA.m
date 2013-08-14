@@ -1,15 +1,17 @@
-function [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, bPCAWhitening, bZCAWhitening)
+function [examplesTraining, examplesTest] = runPCA(examplesTraining, examplesTest, bPCAWhitening, bZCAWhitening, maxDimensions)
 
-[examplesTraining, mapping] = myPCA(examplesTraining');
-examplesTest = mapping.U' * (examplesTest' - mapping.mean);
+[examplesTraining, mapping] = myPCA(examplesTraining', maxDimensions);
+% size(examplesTest');
+% size(mapping.mean);
+examplesTest = mapping.U' * (examplesTest' - repmat(mapping.mean, 1, size(examplesTest', 2)));
 
 if (bPCAWhitening)
-    examplesTraining = diag(1./mapping.lambda)*examplesTraining;
-	examplesTest = diag(1./mapping.lambda)*examplesTest;
+    examplesTraining = bsxfun(@rdivide, examplesTraining,mapping.lambda);
+    examplesTest = bsxfun(@rdivide, examplesTest,mapping.lambda);
 end
 if (bZCAWhitening)
-    examplesTraining = mapping.U*diag(1./mapping.lambda)*examplesTraining;
-	examplesTest = mapping.U*diag(1./mapping.lambda)*examplesTest;
+    examplesTraining = mapping.U*bsxfun(@rdivide, examplesTraining, mapping.lambda);
+    examplesTest = mapping.U*bsxfun(@rdivide, examplesTest, mapping.lambda);
 end
 examplesTraining = examplesTraining';
 examplesTest = examplesTest';
